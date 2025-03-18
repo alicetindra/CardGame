@@ -1,6 +1,5 @@
 package edu.ntnu.idatt2003.Kortspill;
 
-import java.util.List;
 
 public class CardGameApp {
   public void start() {

@@ -1,6 +1,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <repositories>
+    <repository>
+      <id>central</id>
+      <url>https://repo.maven.apache.org/maven2</url>
+    </repository>
+  </repositories>
+
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>edu.ntnu.idatt2003.Kortspill</groupId>
@@ -9,10 +16,9 @@
 
   <properties>
     <javafx.version>23.0.2</javafx.version>
-    <javafx.platform>win</javafx.platform>
     <junit.version>5.8.1</junit.version>
-    <maven.compiler.source>17</maven.compiler.source>
-    <maven.compiler.target>17</maven.compiler.target>
+    <maven.compiler.source>21</maven.compiler.source>
+    <maven.compiler.target>21</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
@@ -22,27 +28,25 @@
     <dependency>
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-controls</artifactId>
-      <version>${javafx.version}</version>
-      <classifier>${javafx.platform}</classifier>
+      <version>23.0.2</version>
     </dependency>
     <dependency>
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-fxml</artifactId>
-      <version>${javafx.version}</version>
-      <classifier>${javafx.platform}</classifier>
+      <version>23.0.2</version>
     </dependency>
 
     <!-- JUnit (för tester) -->
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
-      <version>${junit.version}</version>
+      <version>5.8.1</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-engine</artifactId>
-      <version>${junit.version}</version>
+      <version>5.8.1</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -66,7 +70,7 @@
           <execution>
             <id>default-cli</id>
             <configuration>
-              <mainClass>edu.ntnu.idatt2003.Kortspill.Main</mainClass>
+              <mainClass>edu.ntnu.idatt2003.Kortspill.CardGameGUI</mainClass>
             </configuration>
           </execution>
         </executions>
