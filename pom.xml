@@ -66,7 +66,7 @@
           <execution>
             <id>default-cli</id>
             <configuration>
-              <mainClass>edu.ntnu.idatt2003.cardgame.PlayingCardApp</mainClass>
+              <mainClass>edu.ntnu.idatt2003.Kortspill.Main</mainClass>
             </configuration>
           </execution>
         </executions>
