@@ -1,5 +1,6 @@
 package edu.ntnu.idatt2003.Kortspill;
 
+import java.util.Objects;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -11,7 +12,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -84,8 +84,9 @@ public class CardGameGUI extends Application {
             "-fx-padding: 10;" +
             "-fx-border-radius: 5;" +
             "-fx-background-radius: 5;");
+    resultLabel.setText("No hand dealt");
 
-    //set resultlable
+    //set result label
     root.setTop(resultLabel);
 
     //Label infobox
@@ -103,6 +104,7 @@ public class CardGameGUI extends Application {
         "-fx-padding: 10;" +
         "-fx-border-radius: 5;" +
         "-fx-background-radius: 5;");
+    sumLabel.setText("Sum of cards: ");
 
     queenSpadesLabel.setStyle("-fx-background-color: #a2c6a2;" +
         "-fx-text-fill: black;"+
@@ -111,6 +113,7 @@ public class CardGameGUI extends Application {
         "-fx-padding: 10;" +
         "-fx-border-radius: 5;" +
         "-fx-background-radius: 5;");
+    queenSpadesLabel.setText("Queen of Spades: ");
 
     cardHeartsLabel.setStyle("-fx-background-color: #a2c6a2;" +
         "-fx-text-fill: black;"+
@@ -119,6 +122,7 @@ public class CardGameGUI extends Application {
         "-fx-padding: 10;" +
         "-fx-border-radius: 5;" +
         "-fx-background-radius: 5;");
+    cardHeartsLabel.setText("Card of Hearts: ");
 
     flushLabel.setStyle("-fx-background-color: #a2c6a2;" +
         "-fx-text-fill: black;"+
@@ -127,6 +131,7 @@ public class CardGameGUI extends Application {
         "-fx-padding: 10;" +
         "-fx-border-radius: 5;" +
         "-fx-background-radius: 5;");
+    flushLabel.setText("Flush: ");
 
     infobox.add(sumLabel, 0, 0);
     infobox.add(queenSpadesLabel, 0, 1);
@@ -151,7 +156,8 @@ public class CardGameGUI extends Application {
       currentHand = deck.dealHand(5);
 
       for (int i = 0; i < currentHand.getCards().size(); i++) {
-        Image cardBackImage = new Image(getClass().getResourceAsStream("/images/backOfCard.jpg"));
+        Image cardBackImage = new Image(
+            Objects.requireNonNull(getClass().getResourceAsStream("/images/backOfCard.jpg")));
         ImageView cardBackView = new ImageView(cardBackImage);
         cardBackView.setFitWidth(50);
         cardBackView.setFitHeight(75);
@@ -182,7 +188,8 @@ public class CardGameGUI extends Application {
 
       for (PlayingCard card : currentHand.getCards()) {
         String imagePath = getCardImagePath(card);
-        Image cardImage = new Image(getClass().getResourceAsStream(imagePath));
+        Image cardImage = new Image(
+            Objects.requireNonNull(getClass().getResourceAsStream(imagePath)));
         ImageView cardView = new ImageView(cardImage);
         cardView.setFitWidth(50);
         cardView.setFitHeight(75);
@@ -195,19 +202,19 @@ public class CardGameGUI extends Application {
 
 
   private String getCardImagePath(PlayingCard card) {
-    String suit = switch (card.getSuit()) {
+    String suit = switch (card.suit()) {
       case 'H' -> "hearts";
       case 'D' -> "diamonds";
       case 'C' -> "clubs";
       case 'S' -> "spades";
       default -> throw new IllegalArgumentException("Unknown suit");
     };
-    String face = switch (card.getFace()) {
+    String face = switch (card.face()) {
       case 1 -> "ace";
       case 11 -> "jack";
       case 12 -> "queen";
       case 13 -> "king";
-      default -> String.valueOf(card.getFace());
+      default -> String.valueOf(card.face());
     };
     return "/images/" + face + "_" + suit + ".jpg";
   }

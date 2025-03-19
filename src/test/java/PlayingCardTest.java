@@ -5,8 +5,6 @@ import org.junit.jupiter.api.Test;
 
 public class PlayingCardTest {
 
-  private PlayingCard playingCard;
-
   @Test
   public void testCreatePlayingCard() {
     PlayingCard card1 = new PlayingCard('H', 1);  // Ace of Hearts
@@ -22,14 +20,14 @@ public class PlayingCardTest {
   public void testGetSuit() {
     PlayingCard card1 = new PlayingCard('H', 1);
 
-    assertEquals('H', card1.getSuit());
+    assertEquals('H', card1.suit());
   }
 
   @Test
   public void testGetFace() {
     PlayingCard card1 = new PlayingCard('H', 1);
 
-    assertEquals(1, card1.getFace());
+    assertEquals(1, card1.face());
   }
 
 }

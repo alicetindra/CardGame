@@ -21,7 +21,7 @@ public class Hand {
   public int getSum(){
     int sum = 0;
     for(PlayingCard card : this.cards){
-      sum += card.getFace();
+      sum += card.face();
     }
     return sum;
   }
@@ -29,8 +29,9 @@ public class Hand {
   public boolean checkQueenSpades(){
     boolean QueenSpades = false;
     for(PlayingCard card : this.cards){
-      if(card.getFace() == 12 && card.getSuit() == 'S'){
+      if(card.face() == 12 && card.suit() == 'S'){
         QueenSpades = true;
+        break;
       }
     }
     return QueenSpades;
@@ -41,7 +42,7 @@ public class Hand {
     boolean isHearts = false;
 
     for(PlayingCard card : this.cards){
-      if(card.getSuit() == 'H'){
+      if(card.suit() == 'H'){
         hearts.append(card.getAsString()).append(", ");
         isHearts = true;
       }
@@ -56,7 +57,7 @@ public class Hand {
     int hearts = 0, spades = 0, clubs = 0, diamonds = 0;
 
     for(PlayingCard card : this.cards){
-      switch(card.getSuit()){
+      switch(card.suit()){
         case 'H' -> hearts++;
         case 'S' -> spades++;
         case 'C' -> clubs++;
