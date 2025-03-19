@@ -47,7 +47,7 @@ public class CardGameGUI extends Application {
 
     // Create buttons
     VBox buttonBox = new VBox(10);
-    buttonBox.setPadding(new Insets(40, 20, 0, 10));
+    buttonBox.setPadding(new Insets(0, 20, 0, 10));
     buttonBox.setAlignment(Pos.CENTER);
 
     dealHandButton = new Button("Deal hand");
@@ -79,7 +79,7 @@ public class CardGameGUI extends Application {
     resultLabel.setStyle(
         "-fx-background-color: #a2c6a2;" +
             "-fx-text-fill: black;"+
-            "-fx-border-color: #053005;" +
+            "-fx-border-color: #a2c6a2;" +
             "-fx-border-width: 2;" +
             "-fx-padding: 10;" +
             "-fx-border-radius: 5;" +
@@ -99,7 +99,7 @@ public class CardGameGUI extends Application {
 
     sumLabel.setStyle("-fx-background-color: #a2c6a2;" +
         "-fx-text-fill: black;"+
-        "-fx-border-color: #053005;" +
+        "-fx-border-color: #a2c6a2;" +
         "-fx-border-width: 2;" +
         "-fx-padding: 10;" +
         "-fx-border-radius: 5;" +
@@ -108,7 +108,7 @@ public class CardGameGUI extends Application {
 
     queenSpadesLabel.setStyle("-fx-background-color: #a2c6a2;" +
         "-fx-text-fill: black;"+
-        "-fx-border-color: #053005;" +
+        "-fx-border-color: #a2c6a2;" +
         "-fx-border-width: 2;" +
         "-fx-padding: 10;" +
         "-fx-border-radius: 5;" +
@@ -117,7 +117,7 @@ public class CardGameGUI extends Application {
 
     cardHeartsLabel.setStyle("-fx-background-color: #a2c6a2;" +
         "-fx-text-fill: black;"+
-        "-fx-border-color: #053005;" +
+        "-fx-border-color: #a2c6a2;" +
         "-fx-border-width: 2;" +
         "-fx-padding: 10;" +
         "-fx-border-radius: 5;" +
@@ -126,7 +126,7 @@ public class CardGameGUI extends Application {
 
     flushLabel.setStyle("-fx-background-color: #a2c6a2;" +
         "-fx-text-fill: black;"+
-        "-fx-border-color: #053005;" +
+        "-fx-border-color: #a2c6a2;" +
         "-fx-border-width: 2;" +
         "-fx-padding: 10;" +
         "-fx-border-radius: 5;" +
