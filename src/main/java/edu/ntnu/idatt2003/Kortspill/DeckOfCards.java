@@ -11,7 +11,7 @@ public class DeckOfCards {
   private final char[] suit = { 'S', 'H', 'D', 'C'}; //Spades, Hearts, Diamonds, Clubs
 
   public DeckOfCards() {
-    cards = new ArrayList<PlayingCard>();
+    cards = new ArrayList<>();
     for(char CurrentSuit : suit){
       for(int face=1; face<=13; face++){
         cards.add(new PlayingCard(CurrentSuit, face));
@@ -37,5 +37,13 @@ public class DeckOfCards {
     return hand;
   }
 
+  public void resetDeck(){
+    cards.clear();
+    for(char CurrentSuit : suit){
+      for(int face=1; face<=13; face++){
+        cards.add(new PlayingCard(CurrentSuit, face));
+      }
+    }
+  }
 
 }

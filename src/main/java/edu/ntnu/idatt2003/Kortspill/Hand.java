@@ -22,7 +22,7 @@ public class Hand {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     for (PlayingCard card : cards) {
-      sb.append(card.getAsString()).append("\n");
+      sb.append(card.getAsString()).append(", ");
     }
     return sb.toString();
   }
