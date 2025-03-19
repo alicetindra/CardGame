@@ -10,17 +10,21 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class CardGameGUI extends Application {
-  private Label resultLable = new Label();
+  private final Label resultLabel = new Label();
+  private final Label sumLabel = new Label();
+  private final Label queenSpadesLabel = new Label();
+  private final Label cardHeartsLabel = new Label();
+  private final Label flushLabel = new Label();
   private Hand currentHand;
   private FlowPane cardDisplay;
-  private DeckOfCards deck = new DeckOfCards();
-
+  private final DeckOfCards deck = new DeckOfCards();
+  private Button dealHandButton;
 
 
   public static void main(String[] args) {
@@ -32,7 +36,6 @@ public class CardGameGUI extends Application {
     // Create layout
     BorderPane root = new BorderPane();
     root.setStyle("-fx-background-color: #4f7850;");
-
 
     //Card display
     cardDisplay = new FlowPane();
@@ -47,9 +50,9 @@ public class CardGameGUI extends Application {
     buttonBox.setPadding(new Insets(40, 20, 0, 10));
     buttonBox.setAlignment(Pos.CENTER);
 
-    Button dealHandButton = new Button("Deal hand");
+    dealHandButton = new Button("Deal hand");
     dealHandButton.setStyle(
-        "-fx-background-color: #6f9c6f;" +
+        "-fx-background-color: #a2c6a2;" +
             "-fx-text-fill: black;" +
             "-fx-border-color: #053005;" +
             "-fx-border-width: 2;" +
@@ -60,7 +63,7 @@ public class CardGameGUI extends Application {
     dealHandButton.setOnAction(e -> handleDealHand());
 
     Button checkCardsButton = new Button("Check hand");
-    checkCardsButton.setStyle("-fx-background-color: #6f9c6f;" +
+    checkCardsButton.setStyle("-fx-background-color: #a2c6a2;" +
         "-fx-text-fill: black;" +
         "-fx-border-color: #053005;" +
         "-fx-border-width: 2;" +
@@ -73,19 +76,64 @@ public class CardGameGUI extends Application {
     buttonBox.getChildren().addAll(dealHandButton,checkCardsButton);
     root.setRight(buttonBox);
 
-    //Result label style
-    resultLable.setStyle(
-        "-fx-background-color: #6f9c6f;" +
+    resultLabel.setStyle(
+        "-fx-background-color: #a2c6a2;" +
             "-fx-text-fill: black;"+
+            "-fx-border-color: #053005;" +
+            "-fx-border-width: 2;" +
+            "-fx-padding: 10;" +
+            "-fx-border-radius: 5;" +
+            "-fx-background-radius: 5;");
+
+    //set resultlable
+    root.setTop(resultLabel);
+
+    //Label infobox
+    GridPane infobox = new GridPane();
+    infobox.setAlignment(Pos.CENTER);
+    infobox.setHgap(20);
+    infobox.setVgap(10);
+
+
+
+    sumLabel.setStyle("-fx-background-color: #a2c6a2;" +
+        "-fx-text-fill: black;"+
         "-fx-border-color: #053005;" +
         "-fx-border-width: 2;" +
         "-fx-padding: 10;" +
         "-fx-border-radius: 5;" +
         "-fx-background-radius: 5;");
 
-    StackPane bottomBox = new StackPane(resultLable);
-    bottomBox.setStyle("-fx-padding: 20");
-    root.setBottom(bottomBox);
+    queenSpadesLabel.setStyle("-fx-background-color: #a2c6a2;" +
+        "-fx-text-fill: black;"+
+        "-fx-border-color: #053005;" +
+        "-fx-border-width: 2;" +
+        "-fx-padding: 10;" +
+        "-fx-border-radius: 5;" +
+        "-fx-background-radius: 5;");
+
+    cardHeartsLabel.setStyle("-fx-background-color: #a2c6a2;" +
+        "-fx-text-fill: black;"+
+        "-fx-border-color: #053005;" +
+        "-fx-border-width: 2;" +
+        "-fx-padding: 10;" +
+        "-fx-border-radius: 5;" +
+        "-fx-background-radius: 5;");
+
+    flushLabel.setStyle("-fx-background-color: #a2c6a2;" +
+        "-fx-text-fill: black;"+
+        "-fx-border-color: #053005;" +
+        "-fx-border-width: 2;" +
+        "-fx-padding: 10;" +
+        "-fx-border-radius: 5;" +
+        "-fx-background-radius: 5;");
+
+    infobox.add(sumLabel, 0, 0);
+    infobox.add(queenSpadesLabel, 0, 1);
+    infobox.add(cardHeartsLabel, 1, 0);
+    infobox.add(flushLabel, 1, 1);
+
+    root.setBottom(infobox);
 
 
     // Create and show scene
@@ -97,9 +145,10 @@ public class CardGameGUI extends Application {
 
   private void handleDealHand() {
     try{
-      currentHand = deck.dealHand(5);
-
+      dealHandButton.setText("Deal hand");
       cardDisplay.getChildren().clear();
+
+      currentHand = deck.dealHand(5);
 
       for (int i = 0; i < currentHand.getCards().size(); i++) {
         Image cardBackImage = new Image(getClass().getResourceAsStream("/images/backOfCard.jpg"));
@@ -108,9 +157,16 @@ public class CardGameGUI extends Application {
         cardBackView.setFitHeight(75);
         cardDisplay.getChildren().add(cardBackView);
       }
-      resultLable.setText("Dealt hand:\n" + currentHand.toString());
+
+      sumLabel.setText("Sum of cards: " + currentHand.getSum());
+      queenSpadesLabel.setText("Queen of spades: " + currentHand.checkQueenSpades());
+      cardHeartsLabel.setText("Cards of hearts: " + currentHand.cardHearts());
+      flushLabel.setText("Flush: " + currentHand.flush());
+      resultLabel.setText("Dealt hand:\n" + currentHand.toString());
+
     }catch(IllegalArgumentException e){
-      resultLable.setText("Not enough cards left, reshuffle the deck!");
+      resultLabel.setText("Not enough cards left, reshuffle the deck!");
+      dealHandButton.setText("Shuffle deck");
       deck.resetDeck();
     }
 
@@ -119,7 +175,7 @@ public class CardGameGUI extends Application {
   private void handleCheckCards() {
     try{
       if (currentHand == null) {
-        resultLable.setText("No hand dealt yet!");
+        resultLabel.setText("No hand dealt yet!");
         return;
       }
       cardDisplay.getChildren().clear();
@@ -133,7 +189,7 @@ public class CardGameGUI extends Application {
         cardDisplay.getChildren().add(cardView);
       }
     }catch (IllegalArgumentException e){
-      resultLable.setText("Something went wrong trying to load the picture.");
+      resultLabel.setText("Something went wrong trying to load the picture.");
     }
   }
 
