@@ -1,6 +1,5 @@
 package edu.ntnu.idatt2003.Kortspill;
-import java.io.InputStream;
-import java.util.List;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -15,14 +14,18 @@ public class CardGameGUI extends Application {
   private Label resultLable = new Label();
   private Hand currentHand;
   private VBox root;
-  private HBox cardDisplaySection;
+  private HBox cardDisplay;
+
+  public static void main(String[] args) {
+    launch(args);
+  }
 
   @Override
   public void start(Stage primaryStage) {
     // Create layout
     root = new VBox(10);
-    cardDisplaySection = new HBox(10);
-    root.getChildren().add(cardDisplaySection);
+    cardDisplay = new HBox(10);
+    root.getChildren().add(cardDisplay);
 
     // Create buttons
     Button dealHandButton = new Button("Deal hand");
@@ -46,14 +49,14 @@ public class CardGameGUI extends Application {
     DeckOfCards deck = new DeckOfCards();
     currentHand = deck.dealHand(5);
 
-    cardDisplaySection.getChildren().clear(); // Rensa tidigare kort
+    cardDisplay.getChildren().clear();
 
     for (int i = 0; i < currentHand.getCards().size(); i++) {
       Image cardBackImage = new Image(getClass().getResourceAsStream("/images/backOfCard.jpg"));
       ImageView cardBackView = new ImageView(cardBackImage);
       cardBackView.setFitWidth(50);
       cardBackView.setFitHeight(75);
-      cardDisplaySection.getChildren().add(cardBackView);
+      cardDisplay.getChildren().add(cardBackView);
     }
   }
 
@@ -62,7 +65,7 @@ public class CardGameGUI extends Application {
       resultLable.setText("No hand dealt yet!");
       return;
     }
-    cardDisplaySection.getChildren().clear(); // Rensa tidigare visade kort
+    cardDisplay.getChildren().clear(); // Rensa tidigare visade kort
 
     for (PlayingCard card : currentHand.getCards()) {
       String imagePath = getCardImagePath(card);
@@ -70,7 +73,7 @@ public class CardGameGUI extends Application {
       ImageView cardView = new ImageView(cardImage);
       cardView.setFitWidth(50);
       cardView.setFitHeight(75);
-      cardDisplaySection.getChildren().add(cardView);
+      cardDisplay.getChildren().add(cardView);
     }
   }
 
@@ -94,7 +97,5 @@ public class CardGameGUI extends Application {
   }
 
 
-  public static void main(String[] args) {
-    launch(args);
-  }
+
 }
